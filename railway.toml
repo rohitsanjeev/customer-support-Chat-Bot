@@ -1,0 +1,10 @@
+[build]
+builder = "nixpacks"
+buildCommand = "cd chatbot/chatbot_backend && pip install -r requirements.txt && python manage.py migrate"
+
+[deploy]
+startCommand = "cd chatbot/chatbot_backend && gunicorn chatbot_backend.wsgi:application"
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "on-failure"
+restartPolicyMaxRetries = 10 
